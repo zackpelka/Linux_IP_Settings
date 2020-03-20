@@ -1,0 +1,42 @@
+Configuration file examples
+This example network interface configuration file, ifcfg-eth0, defines a static IP address configuration for a CentOS 6 server installation.
+
+# Intel Corporation 82566DC-2 Gigabit Network Connection
+DEVICE=eth0
+HWADDR=00:16:76:02:BA:DB
+ONBOOT=yes
+IPADDR=192.168.0.10
+BROADCAST=192.168.0.255
+NETMASK=255.255.255.0
+NETWORK=192.168.0.0
+SEARCH="example.com"
+BOOTPROTO=static
+GATEWAY=192.168.0.254
+DNS1=192.168.0.254
+DNS2=8.8.8.8
+TYPE=Ethernet
+USERCTL=no
+IPV6INIT=no
+This file starts the interface on boot, assigns it a static IP address, defines a domain and network gateway, specifies two DNS servers, and does not allow non-root users to start and stop the interface.
+
+The following interface configuration file, ifcfg-eno1, provides a DHCP configuration for a desktop workstation.
+
+TYPE=Ethernet
+BOOTPROTO=dhcp
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=no
+IPV6_AUTOCONF=no
+IPV6_DEFROUTE=no
+IPV6_FAILURE_FATAL=no
+NAME=eno1
+UUID=a67804ff-177a-4efb-959d-c3f98ba0947e
+ONBOOT=yes
+HWADDR=E8:40:F2:3D:0E:A8
+IPV6_PEERDNS=no
+IPV6_PEERROUTES=no
+In this second configuration file example, the DHCP entries, IP address, the search domain, and all other network information are not defined because they are supplied by the DHCP server. Configuration items like the DNS servers can be overridden in the interface configuration file by adding DNS1 and DNS2 lines, as in the previous static configuration example.
+
+Note that this second example contains a UUID line. As far as I can determine, this line has no effect on the functionality of the configuration file. I usually comment it out or even delete it and have never experienced a detrimental effect on my network. 
+
+In both interface configuration files, the HWADDR line specifies the MAC address of the physical network interface. This binds the physical interface to the interface configuration file.  You must change the MAC address in the file if you replace the interface. 
